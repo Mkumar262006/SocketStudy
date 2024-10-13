@@ -8,25 +8,25 @@ To perform a study on Socket Programming
 ## Understanding Socket Programming:
 	Socket programming involves the use of sockets, which serve as endpoints for communication. A socket is identified by an IP address and a port number, and it facilitates data transfer between a client and a server. The two main types of sockets are Stream Sockets, which provide a reliable, connection-oriented communication, and Datagram Sockets, which are connectionless and suitable for scenarios where reliability is less critical.
 ## Key Concepts in Socket Programming:
-1.Sockets
+### 1.Sockets
 •	A socket is a software representation of a communication endpoint in a network.
 •	It is identified by an IP address and a port number.
 •	Sockets can be classified into two main types: Stream Sockets and Datagram Sockets.
 •	Stream Sockets provide a reliable, connection-oriented communication, while Datagram Sockets are connectionless and operate in a best-effort mode.
 
-2. Client-Server Model
+### 2. Client-Server Model
 
 •	Socket programming typically follows the client-server model.
 •	The server listens for incoming connections from clients, while clients initiate connections to the server.
 •	Servers are passive, waiting for connection requests, and clients are active, initiating communication.
 
-3, TCP/IP Protocol:
+### 3. TCP/IP Protocol:
 
 •	Transmission Control Protocol (TCP) and Internet Protocol (IP) are the foundational protocols for socket programming.
 •	TCP provides reliable, connection-oriented communication, ensuring data integrity and order.
 •	IP facilitates the routing of data between devices in a network.
 
-4.Basic Socket Functions:
+### 4.Basic Socket Functions:
 
 •	Socket programming involves a set of functions provided by the operating system or programming language to create, bind, listen, accept, connect, send, and receive data through sockets.
 •	Examples of functions include socket(), bind(), listen(), accept(), connect(), send(), and recv().
@@ -52,6 +52,47 @@ Socket programming finds applications in various domains, including web developm
 3.	File Transfer Protocol: Protocols like FTP (File Transfer Protocol) utilize socket programming for transferring files between a client and a server.
 4.	Networked Games: Online multiplayer games rely on socket programming to facilitate communication between game clients and servers.
 5.	RPC mechanisms: which allow processes to execute code on a remote server, often use socket programming for communication.
+
+
+## Program
+
+### Server
+```py
+import socket
+server=socket.socket()
+server.bind(("localhost",9902))
+server.listen(3)
+print("Socket is listening")
+
+while True:
+    client,address=server.accept()
+    name=client.recv(1024).decode()
+    print("Set connection True",address,name)
+    client.send(bytes("Acknowlegde PRT Received","utf-8"))
+    
+
+server.close()
+```
+### Client
+```py
+import socket 
+client = socket.socket()
+client.connect(('localhost',9902))
+name=input("Enter the name:")
+client.send(bytes(name,'utf-8'))
+print(client.recv(1024).decode())
+
+client.close()
+```
+## Output
+
+### Server
+![image](https://github.com/user-attachments/assets/f92b2404-1e1b-4d9c-99d4-d0778a647df2)
+
+
+### Client
+![image](https://github.com/user-attachments/assets/fc733b29-ccfe-4394-9c14-9e76ab55dc6c)
+
 
 
 ## Result:
